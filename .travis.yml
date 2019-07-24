@@ -13,6 +13,9 @@ script:
 - make clean
 - make test
 - make build
+- id
+- ls -lR build/
+- make clean
 branches:
   only:
     - master
