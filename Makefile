@@ -6,7 +6,7 @@ all: clean test build
 
 .PHONY: clean
 clean:
-	rm -rf build/
+	rm -rf $(BUILD_DIR)
 	go clean
 
 .PHONY: test
@@ -17,4 +17,5 @@ test:
 build:
 	# docker run --rm -v $(PWD):/workspace -w /workspace golang go build -o $(BUILD_DIR)/$(APP_NAME) .
 	# docker run --rm -v $(PWD):/workspace -w /workspace hayajo/golang go build -o $(BUILD_DIR)/$(APP_NAME) .
-	docker run --rm -v $(PWD):/workspace -w /workspace -u $(shell id -u):$(shell id -g) golang go build -o $(BUILD_DIR)/$(APP_NAME) .
+	docker run --rm -v $(PWD):/workspace -w /workspace golang go build -o $(BUILD_DIR)/$(APP_NAME) .
+	docker run --rm -v $(PWD):/workspace -w /workspace golang chown $(shell id -u):$(shell id -g) -R $(BUILD_DIR)
